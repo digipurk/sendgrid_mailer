@@ -9,6 +9,4 @@ environment:
 
 dependencies:
   async: ^2.5.0
-  http: ^0.13.0
-
-dev_dependencies:
+  http: ^1.0.0
