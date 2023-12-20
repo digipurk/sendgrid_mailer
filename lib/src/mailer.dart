@@ -16,6 +16,7 @@ class Mailer {
     var headers = Map<String, String>();
     headers['Authorization'] = 'Bearer $_apiKey';
     headers['Content-Type'] = 'application/json';
+    headers['Access-Control-Allow-Origin'] = '*';
 
     final response = await http.post(
       Uri.parse(_apiURL),
@@ -27,8 +28,7 @@ class Mailer {
       return Result<void>.value({});
     } else if (ResponseStatusCode.ERROR_CODES.contains(response.statusCode)) {
       final Map<String, dynamic> body = json.decode(response.body);
-      return Result<void>.error(
-          body['errors'].map((e) => SendGridError.fromJson(e)));
+      return Result<void>.error(body['errors'].map((e) => SendGridError.fromJson(e)));
     } else {
       return Result<void>.error(
         [
